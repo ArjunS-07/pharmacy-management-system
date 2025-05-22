@@ -83,9 +83,9 @@ DATABASES = {
         
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'pms_db',         # your DB name
-        'USER': 'root',                # your MySQL username
-        'PASSWORD': 'Arjun@2005',   # your MySQL password
+        'NAME': '',         # your DB name
+        'USER': '',                # your MySQL username
+        'PASSWORD': '',   # your MySQL password
         'HOST': 'localhost',
         'PORT': '3306',
     }
