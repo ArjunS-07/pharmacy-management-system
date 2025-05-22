@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import RegexValidator
+
 
 class User(AbstractUser):
     # Custom user model; you can add fields like role if needed
@@ -11,7 +13,16 @@ class Company(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True, blank=True)  # New field
     name = models.CharField(max_length=100)
     address = models.TextField()
-    contact_number = models.CharField(max_length=15)
+    contact_number = models.CharField(
+        max_length=10,
+        validators=[
+            RegexValidator(
+                regex=r'^\d{10}$',
+                message="Contact number must be exactly 10 digits.",
+                code='invalid_contact'
+            )
+        ]
+    )
 
     def __str__(self):
         return self.name

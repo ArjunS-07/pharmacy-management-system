@@ -5,7 +5,7 @@ from .forms import CompanyForm, DrugForm, PurchaseForm, SaleForm, HistorySaleFor
 from .forms import UserRegisterForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-
+from django.db.models import Q
 def public_home(request):
     return render(request, 'basic.html')
 
@@ -20,7 +20,14 @@ def home(request):
 # ---------------- Company Views ----------------
 @login_required
 def company_list(request):
+
+    query = request.GET.get('q')
     companies = Company.objects.filter(user=request.user)
+    if query:
+        companies = companies.filter(
+        Q(name__icontains=query) |
+        Q(contact__icontains=query)
+    )
     return render(request, 'company_list.html', {'companies': companies})
 
 @login_required

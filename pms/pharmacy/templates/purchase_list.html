@@ -3,41 +3,42 @@
 {% block content %}
 <div class="container mt-5">
     {% if user.is_authenticated %}
-        <h2 class="mb-4">Purchase List</h2>
-        <a href="{% url 'purchase_create' %}" class="btn btn-success mb-3">Add New Purchase</a>
-        <table class="table table-striped">
-            <thead class="table-success">
-                <tr>
-                    <th>Drug</th>
-                    <th>Quantity</th>
-                    <th>Date</th>
-                    <th>Supplier</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for purchase in purchases %}
-                <tr>
-                    <td>{{ purchase.drug.name }}</td>
-                    <td>{{ purchase.quantity }}</td>
-                    <td>{{ purchase.purchase_date }}</td>
-                    <td>{{ purchase.supplier_name }}</td>
-                    <td>
-                        <a href="{% url 'purchase_update' purchase.id %}" class="btn btn-warning btn-sm">Edit</a>
-                        <a href="{% url 'purchase_delete' purchase.id %}" class="btn btn-danger btn-sm">Delete</a>
-                    </td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="5" class="text-center text-muted">No purchases available.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <h2 class="mb-4">Purchase List</h2>
+    <table class="table table-striped">
+        <thead class="table-success">
+            <tr>
+                <th>Drug</th>
+                <th>Quantity</th>
+                <th>Date</th>
+                <th>Supplier</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for purchase in purchases %}
+            <tr>
+                <td>{{ purchase.drug.name }}</td>
+                <td>{{ purchase.quantity }}</td>
+                <td>{{ purchase.purchase_date }}</td>
+                <td>{{ purchase.supplier_name }}</td>
+                <td>
+                    <a href="{% url 'purchase_update' purchase.id %}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'purchase_delete' purchase.id %}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center text-muted">No purchases available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'purchase_create' %}" class="btn btn-success mb-3">Add New Purchase</a>
+
     {% else %}
-        <div class="alert alert-warning text-center">
-            <p>You must <a href="{% url 'login' %}">login</a> to view this page.</p>
-        </div>
+    <div class="alert alert-warning text-center">
+        <p>You must <a href="{% url 'login' %}">login</a> to view this page.</p>
+    </div>
     {% endif %}
 </div>
 {% endblock %}

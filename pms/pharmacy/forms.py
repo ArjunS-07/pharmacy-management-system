@@ -1,7 +1,5 @@
 from django import forms
 from .models import Company, Drug, Purchase, Sale, HistorySale
-
-
 from django.contrib.auth.forms import UserCreationForm
 from .models import User
 
@@ -10,28 +8,27 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
-
 class CompanyForm(forms.ModelForm):
     class Meta:
         model = Company
-        fields = '__all__'
+        exclude = ['user']  # Removed fields='__all__'
 
 class DrugForm(forms.ModelForm):
     class Meta:
         model = Drug
-        fields = '__all__'
+        exclude = ['user']
 
 class PurchaseForm(forms.ModelForm):
     class Meta:
         model = Purchase
-        fields = '__all__'
+        exclude = ['user']
 
 class SaleForm(forms.ModelForm):
     class Meta:
         model = Sale
-        fields = '__all__'
+        exclude = ['user']
 
 class HistorySaleForm(forms.ModelForm):
     class Meta:
         model = HistorySale
-        fields = '__all__'
+        exclude = ['user']

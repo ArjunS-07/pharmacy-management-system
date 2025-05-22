@@ -4,7 +4,6 @@
 <div class="container mt-4">
     {% if user.is_authenticated %}
         <h2 class="mb-4">Drugs List</h2>
-        <a href="{% url 'drug_create' %}" class="btn btn-primary mb-3">➕ Add New Drug</a>
 
         <table class="table table-bordered table-striped">
             <thead class="table-success">
@@ -39,6 +38,8 @@
                 {% endfor %}
             </tbody>
         </table>
+                <a href="{% url 'drug_create' %}" class="btn btn-success mb-3"> Add New Drug</a>
+
     {% else %}
         <p>Please <a href="{% url 'login' %}">login</a> to view your data.</p>
     {% endif %}
